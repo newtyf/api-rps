@@ -62,9 +62,6 @@ const updateRoom = async ({ params, body }, res) => {
     const id = params.id;
     const { userId } = body;
     const room = JSON.parse(await client.HGET("ROOMS", id));
-    if (room.integrantes.length > 1) {
-      return res.send({available: false, room: "La sala esta llena"})
-    }
     room.integrantes.push(userId);
     await client.HSET("ROOMS", id, JSON.stringify(room));
 
