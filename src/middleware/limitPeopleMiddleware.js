@@ -4,7 +4,6 @@ const limitPeople = async (req, res, next) => {
   try {
     const id = req.params.id;
     const room = JSON.parse(await client.HGET("ROOMS", id));
-    console.log(room.integrantes.length)
     if (room.integrantes.length < 2) {
       next()
     } else {
@@ -12,7 +11,7 @@ const limitPeople = async (req, res, next) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(400)
+    res.status(404)
     res.send({error, msg: "ALGO_OCURRIO"})
   }
 }

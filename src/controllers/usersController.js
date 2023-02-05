@@ -19,6 +19,21 @@ const getUsers = async (req, res) => {
 };
 
 /**
+ * Obtener detalle de usuario de la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const getUser = async (req, res) => {
+  try {
+    const id = req.params.id
+    const user = await client.HGET("USERS", id);
+    res.send({ user: JSON.parse(user) });
+  } catch (error) {
+    handleHttpError(res, "ERROR_GET_USERS");
+  }
+};
+
+/**
  * crear usuario en la base de datos
  * @param {*} req
  * @param {*} res
@@ -28,8 +43,8 @@ const createUser = async ({ body }, res) => {
     const userId = uniqid();
     const { user } = body;
     const newUser = { userId, ...user };
-    const users = await client.HSET("USERS", userId, JSON.stringify(newUser));
-    res.send({ users, user: newUser });
+    await client.HSET("USERS", userId, JSON.stringify(newUser));
+    res.send({ user: newUser });
   } catch (error) {
     console.log(error);
     handleHttpError(res, "ERROR_CREATE_USERS");
@@ -52,4 +67,4 @@ const updateUser = async ({ body }, res) => {
   }
 };
 
-module.exports = { getUsers, createUser, updateUser };
+module.exports = { getUsers, getUser, createUser, updateUser };
