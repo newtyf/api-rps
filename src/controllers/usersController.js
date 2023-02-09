@@ -67,4 +67,20 @@ const updateUser = async ({ body }, res) => {
   }
 };
 
-module.exports = { getUsers, getUser, createUser, updateUser };
+/**
+ * borrar usuario en la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const deleteUser = async ({ params }, res) => {
+  try {
+    const id = params.id
+    await client.HDEL("USERS", id);
+    res.send({ res: "USUARIO ELIMINADO" });
+  } catch (error) {
+    console.log(error)
+    handleHttpError(res, "ERROR_GET_USERS");
+  }
+};
+
+module.exports = { getUsers, getUser, createUser, updateUser, deleteUser };

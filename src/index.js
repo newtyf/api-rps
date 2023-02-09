@@ -9,10 +9,7 @@ app.use(cors());
 app.use(express.json());
 // app.enable("trust proxy")
 
-/*
- * here set the routes
- */
-
+//* here set the routes
 // todo: localhost/api
 app.use("/api", require("./routes"));
 

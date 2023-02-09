@@ -1,8 +1,6 @@
-// const { tracksModel } = require("../models");
 var uniqid = require("uniqid");
 const { client } = require("../config/redis");
 const { handleHttpError } = require("../utils/handleError");
-client;
 
 /**
  * Obtener lista de la base de datos
@@ -53,11 +51,11 @@ const createRoom = async (req, res) => {
 };
 
 /**
- * update room en la base de datos
+ * join to a room en la base de datos
  * @param {*} req
  * @param {*} res
  */
-const updateRoom = async ({ params, body }, res) => {
+const joinRoom = async ({ params, body }, res) => {
   try {
     const id = params.id;
     const { userId } = body;
@@ -68,8 +66,44 @@ const updateRoom = async ({ params, body }, res) => {
     res.send({ available: true, room });
   } catch (error) {
     console.log(error);
-    handleHttpError(res, "ERROR_UPDATE_ROOM");
+    handleHttpError(res, "ERROR_JOIN_ROOM");
   }
 };
 
-module.exports = { getRooms, getRoom, createRoom, updateRoom };
+/**
+ * exit room en la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const exitRoom = async ({ params, body }, res) => {
+  try {
+    const id = params.id;
+    const { userId } = body;
+    const room = JSON.parse(await client.HGET("ROOMS", id));
+    room.integrantes = room.integrantes.filter(item => item !== userId)
+    await client.HSET("ROOMS", id, JSON.stringify(room));
+
+    res.send({ available: true, room });
+  } catch (error) {
+    console.log(error);
+    handleHttpError(res, "ERROR_EXIT_ROOM");
+  }
+};
+
+/**
+ * delete room en la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const deleteRoom = async ({ params }, res) => {
+  try {
+    const id = params.id;
+    await client.HDEL("ROOMS", id);
+    res.send({ available: true, room: `LA SALA ${id} se ha eliminado correctamente` });
+  } catch (error) {
+    console.log(error);
+    handleHttpError(res, "ERROR_DELETE_ROOM");
+  }
+};
+
+module.exports = { getRooms, getRoom, createRoom, joinRoom, exitRoom, deleteRoom };

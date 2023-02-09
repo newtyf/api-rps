@@ -3,24 +3,19 @@ const {
   getRooms,
   createRoom,
   getRoom,
-  updateRoom,
+  joinRoom,
+  exitRoom,
+  deleteRoom,
 } = require("../controllers/roomsControler");
 const { limitPeople } = require("../middleware/limitPeopleMiddleware");
 const router = express.Router();
 
-// TODO http://localhost/api/rooms GET, POST, DELETE, PUT
+// TODO http://localhost/api/rooms GET, POST, PUT, DELETE
 router.get("/", getRooms);
-
 router.get("/:id", getRoom);
-
 router.post("/", createRoom);
-
-router.put("/:id",limitPeople, updateRoom)
-
-router.delete("/:id", (req, res) => {
-  res.json({
-    romms: 10,
-  });
-});
+router.put("/joinRoom/:id", limitPeople, joinRoom);
+router.put("/exitRoom/:id", exitRoom);
+router.delete("/:id", deleteRoom);
 
 module.exports = router;
