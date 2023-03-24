@@ -1,6 +1,7 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
+import "dotenv/config"
+import express from "express"
+import cors from "cors";
+
 const { dbConnectRedis } = require("./config/redis");
 const app = express();
 const PORT = process.env.PORT || 3002;
