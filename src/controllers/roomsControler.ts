@@ -1,13 +1,14 @@
-var uniqid = require("uniqid");
-const { client } = require("../config/redis");
-const { handleHttpError } = require("../utils/handleError");
+import uniqid from "uniqid";
+import { client } from "../config/redis";
+import { Request, Response } from "express";
+import { handleHttpError } from "../utils/handleError";
 
 /**
  * Obtener lista de la base de datos
  * @param {*} req
  * @param {*} res
  */
-const getRooms = async (req, res) => {
+const getRooms = async (req: Request, res: Response) => {
   try {
     const rooms = await client.HGETALL("ROOMS");
     res.send({ rooms });
@@ -21,7 +22,7 @@ const getRooms = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const getRoom = async ({ params }, res) => {
+const getRoom = async ({ params }: Request, res: Response) => {
   try {
     const id = params.id;
     const room = await client.HGET("ROOMS", id);
@@ -36,7 +37,7 @@ const getRoom = async ({ params }, res) => {
  * @param {*} req
  * @param {*} res
  */
-const createRoom = async (req, res) => {
+const createRoom = async (req: Request, res: Response) => {
   try {
     const id = uniqid();
     const newRoom = {
@@ -55,7 +56,7 @@ const createRoom = async (req, res) => {
  * @param {*} req
  * @param {*} res
  */
-const joinRoom = async ({ params, body }, res) => {
+const joinRoom = async ({ params, body }: Request, res: Response) => {
   try {
     const id = params.id;
     const { userId } = body;
@@ -75,12 +76,12 @@ const joinRoom = async ({ params, body }, res) => {
  * @param {*} req
  * @param {*} res
  */
-const exitRoom = async ({ params, body }, res) => {
+const exitRoom = async ({ params, body }: Request, res: Response) => {
   try {
     const id = params.id;
     const { userId } = body;
     const room = JSON.parse(await client.HGET("ROOMS", id));
-    room.integrantes = room.integrantes.filter(item => item !== userId)
+    room.integrantes = room.integrantes.filter((item: any) => item !== userId);
     await client.HSET("ROOMS", id, JSON.stringify(room));
 
     res.send({ available: true, room });
@@ -95,15 +96,18 @@ const exitRoom = async ({ params, body }, res) => {
  * @param {*} req
  * @param {*} res
  */
-const deleteRoom = async ({ params }, res) => {
+const deleteRoom = async ({ params }: Request, res: Response) => {
   try {
     const id = params.id;
     await client.HDEL("ROOMS", id);
-    res.send({ available: true, room: `LA SALA ${id} se ha eliminado correctamente` });
+    res.send({
+      available: true,
+      room: `LA SALA ${id} se ha eliminado correctamente`,
+    });
   } catch (error) {
     console.log(error);
     handleHttpError(res, "ERROR_DELETE_ROOM");
   }
 };
 
-module.exports = { getRooms, getRoom, createRoom, joinRoom, exitRoom, deleteRoom };
+export { getRooms, getRoom, createRoom, joinRoom, exitRoom, deleteRoom };

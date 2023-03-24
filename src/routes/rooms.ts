@@ -1,14 +1,15 @@
-const express = require("express");
-const {
+import { Router } from "express";
+import { limitPeople } from "../middleware/limitPeopleMiddleware";
+import {
   getRooms,
   createRoom,
   getRoom,
   joinRoom,
   exitRoom,
   deleteRoom,
-} = require("../controllers/roomsControler");
-const { limitPeople } = require("../middleware/limitPeopleMiddleware");
-const router = express.Router();
+} from "../controllers/roomsControler";
+
+const router = Router();
 
 // TODO http://localhost/api/rooms GET, POST, PUT, DELETE
 router.get("/", getRooms);
@@ -18,4 +19,4 @@ router.put("/joinRoom/:id", limitPeople, joinRoom);
 router.put("/exitRoom/:id", exitRoom);
 router.delete("/:id", deleteRoom);
 
-module.exports = router;
+export { router };

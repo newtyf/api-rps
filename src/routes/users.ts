@@ -1,7 +1,13 @@
-const express = require("express");
-const { getUsers, createUser, updateUser, getUser, deleteUser } = require("../controllers/usersController");
+import { Router } from "express";
+import {
+  getUsers,
+  createUser,
+  updateUser,
+  getUser,
+  deleteUser,
+} from "../controllers/usersController";
 
-const router = express.Router();
+const router = Router();
 
 // TODO http://localhost/api/users GET, POST, DELETE, PUT
 router.get("/", getUsers);
@@ -14,4 +20,4 @@ router.put("/", updateUser);
 
 router.delete("/:id", deleteUser);
 
-module.exports = router;
+export { router };

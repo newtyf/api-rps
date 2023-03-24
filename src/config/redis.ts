@@ -5,7 +5,7 @@ const dbConnectRedis = () => {
   client.connect().then(() => {
     console.log("***** Connection established REDIS *****");
   });
-  client.on("error", (err) => console.log("Redis Client Error", err));
+  client.on("error", (err: Error) => console.log("Redis Client Error", err));
 };
 
-module.exports = { dbConnectRedis, client };
+export { dbConnectRedis, client };
