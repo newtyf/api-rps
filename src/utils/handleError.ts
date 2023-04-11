@@ -3,9 +3,10 @@ import { Response } from "express";
 const handleHttpError = (
   res: Response,
   message = "Algo sucedio",
-  code = 400
+  errorRaw?: any
 ) => {
-  res.status(code);
+  console.log(errorRaw)
+  res.status(500);
   res.send({ error: message });
 };
 

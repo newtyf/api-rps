@@ -1,19 +1,24 @@
-import uniqid from "uniqid";
-import { client } from "../config/redis";
 import { Request, Response } from "express";
 import { handleHttpError } from "../utils/handleError";
+import {
+  strongDeleteUser,
+  getAllUsers,
+  getOneUser,
+  createUser,
+  updateUser,
+} from "../services/user.service";
 
 /**
  * Obtener lista de la base de datos
  * @param {*} req
  * @param {*} res
  */
-const getUsers = async (req: Request, res: Response) => {
+const getItems = async (req: Request, res: Response) => {
   try {
-    const users = await client.HGETALL("USERS");
-    res.send({ users });
-  } catch (error) {
-    handleHttpError(res, "ERROR_GET_USERS");
+    const responseGet = await getAllUsers();
+    res.json(responseGet);
+  } catch (e) {
+    handleHttpError(res, "ERROR_GET_USERS", e);
   }
 };
 
@@ -22,13 +27,12 @@ const getUsers = async (req: Request, res: Response) => {
  * @param {*} req
  * @param {*} res
  */
-const getUser = async (req: Request, res: Response) => {
+const getItem = async ({ params }: Request, res: Response) => {
   try {
-    const id = req.params.id;
-    const user = await client.HGET("USERS", id);
-    res.send({ user: JSON.parse(user) });
-  } catch (error) {
-    handleHttpError(res, "ERROR_GET_USERS");
+    const responseGet = await getOneUser(params.id);
+    res.json(responseGet);
+  } catch (e) {
+    handleHttpError(res, "ERROR_GET_USERS", e);
   }
 };
 
@@ -37,16 +41,12 @@ const getUser = async (req: Request, res: Response) => {
  * @param {*} req
  * @param {*} res
  */
-const createUser = async ({ body }: Request, res: Response) => {
+const createItem = async ({ body }: Request, res: Response) => {
   try {
-    const userId = uniqid();
-    const { user } = body;
-    const newUser = { userId, ...user };
-    await client.HSET("USERS", userId, JSON.stringify(newUser));
-    res.send({ user: newUser });
-  } catch (error) {
-    console.log(error);
-    handleHttpError(res, "ERROR_CREATE_USERS");
+    const responseInsert = await createUser(body);
+    res.json({ responseInsert });
+  } catch (e) {
+    handleHttpError(res, "ERROR_CREATE_USERS", e);
   }
 };
 
@@ -55,14 +55,12 @@ const createUser = async ({ body }: Request, res: Response) => {
  * @param {*} req
  * @param {*} res
  */
-const updateUser = async ({ body }: Request, res: Response) => {
+const updateItem = async ({ body, params }: Request, res: Response) => {
   try {
-    const { user } = body;
-    const users = await client.HSET("USERS", user.userId, JSON.stringify(user));
-    res.send({ users, user });
-  } catch (error) {
-    console.log(error);
-    handleHttpError(res, "ERROR_CREATE_USERS");
+    const responseUpdate = await updateUser(params.id, body);
+    res.json(responseUpdate);
+  } catch (e) {
+    handleHttpError(res, "ERROR_CREATE_USERS", e);
   }
 };
 
@@ -71,15 +69,13 @@ const updateUser = async ({ body }: Request, res: Response) => {
  * @param {*} req
  * @param {*} res
  */
-const deleteUser = async ({ params }: Request, res: Response) => {
+const deleteItem = async ({ params }: Request, res: Response) => {
   try {
-    const id = params.id;
-    await client.HDEL("USERS", id);
-    res.send({ res: "USUARIO ELIMINADO" });
-  } catch (error) {
-    console.log(error);
-    handleHttpError(res, "ERROR_GET_USERS");
+    await strongDeleteUser(params.id);
+    res.json({ res: "USUARIO ELIMINADO" });
+  } catch (e) {
+    handleHttpError(res, "ERROR_GET_USERS", e);
   }
 };
 
-export { getUsers, getUser, createUser, updateUser, deleteUser };
+export { getItems, getItem, createItem, updateItem, deleteItem };
