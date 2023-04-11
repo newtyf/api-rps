@@ -12,11 +12,11 @@ export const limitPeople = async (
     if (room.integrantes.length <= 2) {
       next();
     } else {
-      res.send({ available: false, room: "La sala esta llena" });
+      res.json({ available: false, room: "La sala esta llena" });
     }
   } catch (error) {
     console.log(error);
     res.status(400);
-    res.send({ error, msg: "ALGO_OCURRIO" });
+    res.json({ error, msg: "ALGO_OCURRIO" });
   }
 };

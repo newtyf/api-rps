@@ -76,7 +76,7 @@ const deleteItem = async ({ params }: Request, res: Response) => {
   try {
     const idRoom = params.id;
     await deleteRoom(idRoom)
-    res.send({
+    res.json({
       available: true,
       room: `LA SALA ${idRoom} se ha eliminado correctamente`,
     });

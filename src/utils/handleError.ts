@@ -7,7 +7,7 @@ const handleHttpError = (
 ) => {
   console.log(errorRaw)
   res.status(500);
-  res.send({ error: message });
+  res.json({ error: message });
 };
 
 export { handleHttpError };
