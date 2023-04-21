@@ -18,6 +18,7 @@ const getItems = async (req: Request, res: Response) => {
     const responseGetAll = await getAllRooms();
     res.json(responseGetAll);
   } catch (error) {
+    console.log(error);
     handleHttpError(res, "ERROR_GET_ROOMS");
   }
 };
@@ -33,6 +34,7 @@ const getItem = async ({ params }: Request, res: Response) => {
     const responseGet = await getOneRoom(idRoom);
     res.json(responseGet);
   } catch (error) {
+    console.log(error);
     handleHttpError(res, "ERROR_GET_ROOMS");
   }
 };
@@ -63,7 +65,7 @@ const updateItem = async ({ params, body }: Request, res: Response) => {
     res.json(responseUpdate);
   } catch (error) {
     console.log(error);
-    handleHttpError(res, "ERROR_JOIN_ROOM");
+    handleHttpError(res, "ERROR_UPDATE_ROOM");
   }
 };
 
@@ -75,7 +77,7 @@ const updateItem = async ({ params, body }: Request, res: Response) => {
 const deleteItem = async ({ params }: Request, res: Response) => {
   try {
     const idRoom = params.id;
-    await deleteRoom(idRoom)
+    await deleteRoom(idRoom);
     res.json({
       available: true,
       room: `LA SALA ${idRoom} se ha eliminado correctamente`,

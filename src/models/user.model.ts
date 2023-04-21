@@ -1,5 +1,6 @@
 import { Schema, model } from "mongoose";
 import { IUSER } from "../interfaces/user.interface";
+import RoomModel from "./room.model";
 
 const userSchema = new Schema<IUSER>(
   {
@@ -11,9 +12,9 @@ const userSchema = new Schema<IUSER>(
       type: Number,
       required: true,
     },
-    belongsRoom: {
-      type: String,
-      required: true,
+    room: {
+      type: Schema.Types.ObjectId,
+      ref: "Room"
     },
     pick: {
       type: {
@@ -39,5 +40,5 @@ const userSchema = new Schema<IUSER>(
   { timestamps: true, versionKey: false }
 );
 
-const UserModel = model("users", userSchema);
+const UserModel = model("User", userSchema);
 export default UserModel;

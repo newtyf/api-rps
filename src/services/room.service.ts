@@ -2,8 +2,7 @@ import { IRoom } from "../interfaces/room.interface";
 import RoomModel from "../models/room.model";
 
 const createRoom = async () => {
-  const newRoom: IRoom = {
-    integrantes: [],
+  const newRoom = {
     state: "WAIT",
     winner: null,
   };
@@ -17,19 +16,19 @@ const memebersRoom = async (idRoom: string) => {
   const responseRoom = await RoomModel.findById(idRoom);
 
   if (responseRoom) {
-    return responseRoom.integrantes;
+    return responseRoom.users;
   } else {
     return [];
   }
 };
 
 const getAllRooms = async (): Promise<IRoom[]> => {
-  const responseRooms = await RoomModel.find();
+  const responseRooms = await RoomModel.find().populate("users");
   return responseRooms;
 };
 
 const getOneRoom = async (idRoom: string): Promise<IRoom | null> => {
-  const responseRoom = await RoomModel.findById(idRoom);
+  const responseRoom = await RoomModel.findById(idRoom).populate("users");
 
   return responseRoom;
 };
@@ -47,4 +46,11 @@ const deleteRoom = async (idRoom: string) => {
   return responseDelete;
 };
 
-export { createRoom, memebersRoom, getAllRooms, getOneRoom, updateRoom, deleteRoom };
+export {
+  createRoom,
+  memebersRoom,
+  getAllRooms,
+  getOneRoom,
+  updateRoom,
+  deleteRoom,
+};

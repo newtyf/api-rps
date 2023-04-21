@@ -1,5 +1,7 @@
+import { ObjectId } from "mongoose";
+
 export interface IRoom {
-  integrantes: string[];
+  users: ObjectId[];
   state: "START" | "END" | "WAIT";
   winner: string | null;
 }

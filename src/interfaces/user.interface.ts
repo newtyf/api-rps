@@ -1,3 +1,5 @@
+import { ObjectId } from "mongoose";
+
 type pick = {
   color: string;
   id: number;
@@ -7,7 +9,7 @@ type pick = {
 
 export interface IUSER {
   name: string;
-  belongsRoom: string;
+  room: ObjectId;
   pick: pick | null;
   points: number;
 }

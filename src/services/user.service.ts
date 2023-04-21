@@ -7,12 +7,12 @@ const createUser = async (user: IUSER) => {
 };
 
 const getAllUsers = async () => {
-  const ResponseGet = await UserModel.find();
+  const ResponseGet = await UserModel.find().populate("room");
   return ResponseGet;
 };
 
 const getOneUser = async (id: string) => {
-  const responseGet = await UserModel.findById(id);
+  const responseGet = await UserModel.findById(id).populate("room");
   return responseGet;
 };
 

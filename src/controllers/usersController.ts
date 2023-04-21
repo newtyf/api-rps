@@ -44,7 +44,7 @@ const getItem = async ({ params }: Request, res: Response) => {
 const createItem = async ({ body }: Request, res: Response) => {
   try {
     const responseInsert = await createUser(body);
-    res.json({ responseInsert });
+    res.json(responseInsert);
   } catch (e) {
     handleHttpError(res, "ERROR_CREATE_USERS", e);
   }
