@@ -1,6 +1,5 @@
 import { Schema, model } from "mongoose";
 import { IUSER } from "../interfaces/user.interface";
-import RoomModel from "./room.model";
 
 const userSchema = new Schema<IUSER>(
   {

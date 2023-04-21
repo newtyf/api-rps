@@ -1,0 +1,232 @@
+{
+    "info": {
+        "name": "R-P-S",
+        "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+        "description": ""
+    },
+    "item": [
+        {
+            "name": "rooms",
+            "item": [
+                {
+                    "name": "get-rooms",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3002/api/rooms/",
+                            "path": [
+                                "api",
+                                "rooms"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                },
+                {
+                    "name": "get-one-room",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3002/api/rooms/644200477c5fe2a93f0326c4",
+                            "path": [
+                                "api",
+                                "rooms",
+                                "644200477c5fe2a93f0326c4"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                },
+                {
+                    "name": "create-room",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:3002/api/rooms",
+                            "path": [
+                                "api",
+                                "rooms"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                },
+                {
+                    "name": "update-room",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3002/api/rooms/644200477c5fe2a93f0326c4",
+                            "path": [
+                                "api",
+                                "rooms",
+                                "644200477c5fe2a93f0326c4"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"users\": [\"6442004b7c5fe2a93f0326c6\", \"644200e77d8f95e90b6\"],\n  \"state\": \"WAIT\",\n  \"winner\": null\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "delete-room",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:3002/api/rooms/6435bc35411244281501e41d",
+                            "path": [
+                                "api",
+                                "rooms",
+                                "6435bc35411244281501e41d"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                }
+            ]
+        },
+        {
+            "name": "users",
+            "item": [
+                {
+                    "name": "get-users",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3002/api/users",
+                            "path": [
+                                "api",
+                                "users"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                },
+                {
+                    "name": "get-detail-user",
+                    "request": {
+                        "method": "GET",
+                        "url": {
+                            "raw": "http://localhost:3002/api/users/6442004b7c5fe2a93f0326c6",
+                            "path": [
+                                "api",
+                                "users",
+                                "6442004b7c5fe2a93f0326c6"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                },
+                {
+                    "name": "create-user",
+                    "request": {
+                        "method": "POST",
+                        "url": {
+                            "raw": "http://localhost:3002/api/users",
+                            "path": [
+                                "api",
+                                "users"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Newt\",\n  \"points\": 0,\n  \"pick\": null,\n  \"room\": \"644200477c5fe2a93f0326c4\"\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "update-user",
+                    "request": {
+                        "method": "PUT",
+                        "url": {
+                            "raw": "http://localhost:3002/api/users/641e0403f0a7f7b325caacd7",
+                            "path": [
+                                "api",
+                                "users",
+                                "641e0403f0a7f7b325caacd7"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        },
+                        "body": {
+                            "mode": "raw",
+                            "options": {
+                                "raw": {
+                                    "language": "json"
+                                }
+                            },
+                            "raw": "{\n  \"name\": \"Newtza\",\n  \"points\": 0,\n  \"belongsRoom\": \"11111111111\",\n  \"pick\": null\n}"
+                        }
+                    }
+                },
+                {
+                    "name": "delete-user",
+                    "request": {
+                        "method": "DELETE",
+                        "url": {
+                            "raw": "http://localhost:3002/api/users/641e03ebf0a7f7b325caacd5",
+                            "path": [
+                                "api",
+                                "users",
+                                "641e03ebf0a7f7b325caacd5"
+                            ],
+                            "protocol": "http",
+                            "host": [
+                                "localhost"
+                            ],
+                            "port": "3002"
+                        }
+                    }
+                }
+            ]
+        }
+    ]
+}
