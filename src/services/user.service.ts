@@ -7,7 +7,7 @@ const createUser = async (user: IUSER) => {
 };
 
 const getAllUsers = async () => {
-  const ResponseGet = await UserModel.find().populate("room");
+  const ResponseGet = await UserModel.find().populate({path: "room"});
   return ResponseGet;
 };
 

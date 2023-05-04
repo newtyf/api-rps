@@ -4,6 +4,7 @@ import {
   deleteItem,
   getItem,
   getItems,
+  joinItem,
   updateItem,
 } from "../controllers/roomsControler";
 import { limitPeople, validateObjectIds } from "../middleware";
@@ -14,7 +15,8 @@ const router = Router();
 router.get("/", getItems);
 router.get("/:id", getItem);
 router.post("/", createItem);
-router.put("/:id", validateObjectIds, limitPeople, updateItem);
+router.put("/update/:id", updateItem);
+router.patch("/join/", limitPeople, joinItem);
 router.delete("/:id", deleteItem);
 
 export { router };

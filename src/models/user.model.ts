@@ -1,5 +1,5 @@
 import { Schema, model } from "mongoose";
-import { IUSER } from "../interfaces/user.interface";
+import { IUSER, Pick } from "../interfaces/user.interface";
 
 const userSchema = new Schema<IUSER>(
   {
@@ -13,27 +13,11 @@ const userSchema = new Schema<IUSER>(
     },
     room: {
       type: Schema.Types.ObjectId,
-      ref: "Room"
+      ref: "Room",
     },
     pick: {
-      type: {
-        name: {
-          type: String,
-          required: true,
-        },
-        color: {
-          type: String,
-          required: true,
-        },
-        id: {
-          type: Number,
-          required: true,
-        },
-        img: {
-          type: String,
-          required: true,
-        },
-      },
+      type: String,
+      enum: Pick,
     },
   },
   { timestamps: true, versionKey: false }

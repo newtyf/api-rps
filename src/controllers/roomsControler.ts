@@ -5,6 +5,7 @@ import {
   deleteRoom,
   getAllRooms,
   getOneRoom,
+  joinRoom,
   updateRoom,
 } from "../services/room.service";
 
@@ -54,7 +55,7 @@ const createItem = async (req: Request, res: Response) => {
 };
 
 /**
- * join to a room en la base de datos
+ * update a room en la base de datos
  * @param {*} req
  * @param {*} res
  */
@@ -63,6 +64,21 @@ const updateItem = async ({ params, body }: Request, res: Response) => {
     const idRoom = params.id;
     const responseUpdate = await updateRoom(idRoom, body);
     res.json(responseUpdate);
+  } catch (error) {
+    console.log(error);
+    handleHttpError(res, "ERROR_UPDATE_ROOM");
+  }
+};
+
+/**
+ * join to a room en la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const joinItem = async ({ body }: Request, res: Response) => {
+  try {
+    const responseJoin = await joinRoom(body);
+    res.json(responseJoin);
   } catch (error) {
     console.log(error);
     handleHttpError(res, "ERROR_UPDATE_ROOM");
@@ -88,4 +104,4 @@ const deleteItem = async ({ params }: Request, res: Response) => {
   }
 };
 
-export { getItems, getItem, createItem, updateItem, deleteItem };
+export { getItems, getItem, createItem, updateItem, joinItem, deleteItem };

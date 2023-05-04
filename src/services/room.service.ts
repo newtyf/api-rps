@@ -1,4 +1,6 @@
+import { ObjectId } from "mongoose";
 import { IRoom } from "../interfaces/room.interface";
+import { IUSER } from "../interfaces/user.interface";
 import RoomModel from "../models/room.model";
 
 const createRoom = async () => {
@@ -12,7 +14,7 @@ const createRoom = async () => {
   return responseCreate;
 };
 
-const memebersRoom = async (idRoom: string) => {
+const memebersRoom = async (idRoom: ObjectId) => {
   const responseRoom = await RoomModel.findById(idRoom);
 
   if (responseRoom) {
@@ -23,7 +25,7 @@ const memebersRoom = async (idRoom: string) => {
 };
 
 const getAllRooms = async (): Promise<IRoom[]> => {
-  const responseRooms = await RoomModel.find().populate("users");
+  const responseRooms = await RoomModel.find();
   return responseRooms;
 };
 
@@ -40,6 +42,21 @@ const updateRoom = async (idRoom: string, data: IRoom) => {
   return responseupdate;
 };
 
+const joinRoom = async (user: IUSER) => {
+  const responseGet = await RoomModel.findById(user.room);
+  responseGet!.users.push(user._id);
+
+  const responseupdate = await RoomModel.findByIdAndUpdate(
+    user.room,
+    responseGet!,
+    {
+      new: true,
+    }
+  );
+  console.log(responseupdate)
+  return responseupdate;
+};
+
 const deleteRoom = async (idRoom: string) => {
   const responseDelete = await RoomModel.findByIdAndDelete(idRoom);
 
@@ -52,5 +69,6 @@ export {
   getAllRooms,
   getOneRoom,
   updateRoom,
+  joinRoom,
   deleteRoom,
 };

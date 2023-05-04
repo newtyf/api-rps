@@ -1,5 +1,6 @@
 import { NextFunction, Request, Response } from "express";
-import { IRoom } from "../interfaces/room.interface";
+import { IUSER } from "../interfaces/user.interface";
+import { memebersRoom } from "../services/room.service";
 
 export const limitPeople = async (
   { body }: Request,
@@ -7,9 +8,10 @@ export const limitPeople = async (
   next: NextFunction
 ) => {
   try {
-    const room: IRoom = body;
+    const user: IUSER = body;
+    const members = await memebersRoom(user.room)
 
-    if (room.users.length <= 2) {
+    if (members.length <= 1) {
       next();
     } else {
       res.json({ available: false, room: "La sala esta llena" });
@@ -20,3 +22,4 @@ export const limitPeople = async (
     res.json({ error, msg: "ALGO_OCURRIO" });
   }
 };
+

@@ -1,15 +1,15 @@
 import { ObjectId } from "mongoose";
 
-type pick = {
-  color: string;
-  id: number;
-  img: string;
-  name: string;
-};
+export enum Pick {
+  ROCK = "ROCK",
+  PAPER = "PAPER",
+  SCISSORS = "SCISSORS"
+}
 
 export interface IUSER {
+  _id: ObjectId;
   name: string;
   room: ObjectId;
-  pick: pick | null;
+  pick: Pick | null;
   points: number;
 }
