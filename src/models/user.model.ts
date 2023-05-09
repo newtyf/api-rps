@@ -17,7 +17,6 @@ const userSchema = new Schema<IUSER>(
     },
     pick: {
       type: String,
-      enum: Pick,
     },
   },
   { timestamps: true, versionKey: false }
