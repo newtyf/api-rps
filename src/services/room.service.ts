@@ -30,7 +30,7 @@ const getAllRooms = async (): Promise<IRoom[]> => {
 };
 
 const getOneRoom = async (idRoom: string): Promise<IRoom | null> => {
-  const responseRoom = await RoomModel.findById(idRoom).populate("users");
+  const responseRoom = await RoomModel.findById(idRoom);
 
   return responseRoom;
 };
@@ -44,16 +44,18 @@ const updateRoom = async (idRoom: string, data: IRoom) => {
 
 const joinRoom = async (user: IUSER) => {
   const responseGet = await RoomModel.findById(user.room);
-  responseGet!.users.push(user._id);
+  if (responseGet && !responseGet?.users.includes(user._id)) {
+    responseGet.users.push(user._id);
+  }
 
   const responseupdate = await RoomModel.findByIdAndUpdate(
     user.room,
-    responseGet!,
+    responseGet as IRoom,
     {
       new: true,
     }
   );
-  console.log(responseupdate)
+  console.log(responseupdate);
   return responseupdate;
 };
 
