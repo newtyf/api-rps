@@ -1,7 +1,10 @@
-require("dotenv").config();
-const express = require("express");
-const cors = require("cors");
-const { dbConnectRedis } = require("./config/redis");
+import "dotenv/config";
+import express from "express";
+import cors from "cors";
+
+import { dbConnectMongo } from "./config/mongo";
+import { router } from "./routes";
+
 const app = express();
 const PORT = process.env.PORT || 3002;
 
@@ -11,9 +14,12 @@ app.use(express.json());
 
 //* here set the routes
 // todo: localhost/api
-app.use("/api", require("./routes"));
+app.use("/api", router);
+
+dbConnectMongo();
+// dbConnectRedis();
 
 app.listen(PORT, () => {
   console.log(`your app listen in http://localhost:${PORT}`);
 });
-dbConnectRedis();
+

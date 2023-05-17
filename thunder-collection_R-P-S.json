@@ -1,0 +1,179 @@
+{
+    "client": "Thunder Client",
+    "collectionName": "R-P-S",
+    "dateExported": "2023-04-21T15:45:04.527Z",
+    "version": "1.1",
+    "folders": [
+        {
+            "_id": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "rooms",
+            "containerId": "",
+            "created": "2023-01-30T21:41:27.622Z",
+            "sortNum": 10000
+        },
+        {
+            "_id": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "users",
+            "containerId": "",
+            "created": "2023-01-30T21:41:35.427Z",
+            "sortNum": 20000
+        }
+    ],
+    "requests": [
+        {
+            "_id": "d42fc539-41c2-4eee-a28a-7be08c60e90c",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "get-rooms",
+            "url": "http://localhost:3002/api/rooms/",
+            "method": "GET",
+            "sortNum": 25000,
+            "created": "2023-01-30T16:06:31.553Z",
+            "modified": "2023-02-07T14:08:29.388Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "7eb3aeff-40b9-4e7f-bb17-35a10f37b217",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "get-one-room",
+            "url": "http://localhost:3002/api/rooms/644200477c5fe2a93f0326c4",
+            "method": "GET",
+            "sortNum": 30000,
+            "created": "2023-01-30T16:50:20.632Z",
+            "modified": "2023-04-21T03:30:40.023Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "ee9fa33b-c520-4d0b-907e-dc7eb04a5dfc",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "create-room",
+            "url": "http://localhost:3002/api/rooms",
+            "method": "POST",
+            "sortNum": 35000,
+            "created": "2023-01-30T16:05:55.396Z",
+            "modified": "2023-01-31T15:12:52.234Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "2aa01169-551f-44a6-83cc-43a29877d9e2",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "update-room",
+            "url": "http://localhost:3002/api/rooms/644200477c5fe2a93f0326c4",
+            "method": "PUT",
+            "sortNum": 40000,
+            "created": "2023-01-30T21:28:23.720Z",
+            "modified": "2023-04-21T03:51:54.304Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"users\": [\"6442004b7c5fe2a93f0326c6\", \"644200e77d8f95e90b6\"],\n  \"state\": \"WAIT\",\n  \"winner\": null\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "82d910e7-2cf6-4ae0-b661-ff8743f861dc",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "get-users",
+            "url": "http://localhost:3002/api/users",
+            "method": "GET",
+            "sortNum": 40000,
+            "created": "2023-01-30T22:09:41.686Z",
+            "modified": "2023-01-30T22:10:22.376Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "c80de082-56ce-4cb3-879d-91771c3636ec",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "get-detail-user",
+            "url": "http://localhost:3002/api/users/6442004b7c5fe2a93f0326c6",
+            "method": "GET",
+            "sortNum": 45000,
+            "created": "2023-02-01T16:51:27.496Z",
+            "modified": "2023-04-21T03:32:23.132Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "3faa57a6-8f0a-41a9-bc02-d469eb898b8e",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "create-user",
+            "url": "http://localhost:3002/api/users",
+            "method": "POST",
+            "sortNum": 50000,
+            "created": "2023-01-31T13:24:30.103Z",
+            "modified": "2023-04-21T03:20:07.969Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Newt\",\n  \"points\": 0,\n  \"pick\": null,\n  \"room\": \"644200477c5fe2a93f0326c4\"\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "f28f68a7-8a8e-462c-b570-bb24014ea0cf",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "update-user",
+            "url": "http://localhost:3002/api/users/641e0403f0a7f7b325caacd7",
+            "method": "PUT",
+            "sortNum": 60000,
+            "created": "2023-01-31T13:43:49.202Z",
+            "modified": "2023-03-24T21:59:07.699Z",
+            "headers": [],
+            "params": [],
+            "body": {
+                "type": "json",
+                "raw": "{\n  \"name\": \"Newtza\",\n  \"points\": 0,\n  \"belongsRoom\": \"11111111111\",\n  \"pick\": null\n}",
+                "form": []
+            },
+            "tests": []
+        },
+        {
+            "_id": "b7df192f-891b-4f8a-b549-01690e576153",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "675776fd-1814-41df-9edb-84521b908cd8",
+            "name": "delete-user",
+            "url": "http://localhost:3002/api/users/641e03ebf0a7f7b325caacd5",
+            "method": "DELETE",
+            "sortNum": 80000,
+            "created": "2023-02-07T00:47:41.407Z",
+            "modified": "2023-03-24T21:56:22.861Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        },
+        {
+            "_id": "53302e1b-c316-4527-b948-63cb715b87ca",
+            "colId": "9a80150a-32fa-41ae-82a8-2cb56f54a3b5",
+            "containerId": "368e6c0a-5a39-4465-b8ba-6b66dc47c418",
+            "name": "delete-room",
+            "url": "http://localhost:3002/api/rooms/6435bc35411244281501e41d",
+            "method": "DELETE",
+            "sortNum": 90000,
+            "created": "2023-02-07T14:08:23.115Z",
+            "modified": "2023-04-11T21:10:07.520Z",
+            "headers": [],
+            "params": [],
+            "tests": []
+        }
+    ]
+}
