@@ -4,8 +4,8 @@ services:
     build:
       context: .
       target: runner
-    environment:
-      - MONGO_URI=mongodb://dbmongo:27017/rps-db
+      args:
+        - MONGO_URI_ATLAS=mongodb://dbmongo:27017/rps-db
     container_name: node-api-rps
     ports:
       # host:container

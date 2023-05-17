@@ -20,6 +20,8 @@ RUN npm run build
 FROM node:18-alpine3.16 AS runner
 WORKDIR /app
 
+#* redefine ARG
+ARG MONGO_URI_ATLAS
 # DEFINE ENVIRONMENT VARIABLES
 ENV NODE_ENV=production
 ENV MONGO_URI=$MONGO_URI_ATLAS
