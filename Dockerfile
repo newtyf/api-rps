@@ -1,3 +1,5 @@
+ARG EnvironmentVariable
+
 #? stage fot install dependecies for the app
 FROM node:18-alpine3.16 AS deps
 WORKDIR /app
@@ -18,7 +20,10 @@ RUN npm run build
 FROM node:18-alpine3.16 AS runner
 WORKDIR /app
 
+# DEFINE ENVIRONMENT VARIABLES
 ENV NODE_ENV production
+ENV MONGO_URI mongodb://dbmongo:27017/rps-db
+ENV PORT 3002
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 api
@@ -27,7 +32,6 @@ COPY --from=builder --chown=api:nodejs /app/dist ./dist
 
 COPY --from=deps /app/node_modules ./node_modules
 COPY --from=deps /app/package.json ./package.json
-COPY --from=builder /app/.env ./.env
 
 
 USER api
