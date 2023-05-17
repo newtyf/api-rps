@@ -1,4 +1,4 @@
-ARG EnvironmentVariable
+ARG MONGO_URI_ATLAS
 
 #? stage fot install dependecies for the app
 FROM node:18-alpine3.16 AS deps
@@ -21,9 +21,9 @@ FROM node:18-alpine3.16 AS runner
 WORKDIR /app
 
 # DEFINE ENVIRONMENT VARIABLES
-ENV NODE_ENV production
-ENV MONGO_URI mongodb://dbmongo:27017/rps-db
-ENV PORT 3002
+ENV NODE_ENV=production
+ENV MONGO_URI=$MONGO_URI_ATLAS
+ENV PORT=3002
 
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 api
