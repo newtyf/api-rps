@@ -3,6 +3,7 @@ import { handleHttpError } from "../utils/handleError";
 import {
   createRoom,
   deleteRoom,
+  exitRoom,
   getAllRooms,
   getOneRoom,
   joinRoom,
@@ -86,6 +87,21 @@ const joinItem = async ({ body }: Request, res: Response) => {
 };
 
 /**
+ * join to a room en la base de datos
+ * @param {*} req
+ * @param {*} res
+ */
+const exitItem = async ({ body }: Request, res: Response) => {
+  try {
+    const responseExit = await exitRoom(body);
+    res.json(responseExit);
+  } catch (error) {
+    console.log(error);
+    handleHttpError(res, "ERROR_UPDATE_ROOM");
+  }
+};
+
+/**
  * delete room en la base de datos
  * @param {*} req
  * @param {*} res
@@ -104,4 +120,4 @@ const deleteItem = async ({ params }: Request, res: Response) => {
   }
 };
 
-export { getItems, getItem, createItem, updateItem, joinItem, deleteItem };
+export { getItems, getItem, createItem, updateItem, joinItem, exitItem, deleteItem };

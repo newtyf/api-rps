@@ -1,4 +1,4 @@
-import { ObjectId } from "mongoose";
+import { ObjectId, Schema } from "mongoose";
 import { IRoom } from "../interfaces/room.interface";
 import { IUSER } from "../interfaces/user.interface";
 import RoomModel from "../models/room.model";
@@ -59,6 +59,28 @@ const joinRoom = async (user: IUSER) => {
   return responseupdate;
 };
 
+const exitRoom = async (user: IUSER) => {
+  const responseGet = await RoomModel.findById(user.room);
+
+  if (!responseGet) {
+    return new Error("No se encontro la sala");
+  }
+
+  if (responseGet.users.includes(user._id)) {
+    responseGet.users = responseGet.users.filter((item) => item.toString() !== user._id.toString());
+  }
+
+  const responseupdate = await RoomModel.findByIdAndUpdate(
+    user.room,
+    responseGet as IRoom,
+    {
+      new: true,
+    }
+  );
+  console.log(responseupdate);
+  return responseupdate;
+};
+
 const deleteRoom = async (idRoom: string) => {
   const responseDelete = await RoomModel.findByIdAndDelete(idRoom);
 
@@ -72,5 +94,6 @@ export {
   getOneRoom,
   updateRoom,
   joinRoom,
+  exitRoom,
   deleteRoom,
 };

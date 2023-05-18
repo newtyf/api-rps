@@ -2,6 +2,7 @@ import { Router } from "express";
 import {
   createItem,
   deleteItem,
+  exitItem,
   getItem,
   getItems,
   joinItem,
@@ -17,6 +18,7 @@ router.get("/:id", getItem);
 router.post("/", createItem);
 router.put("/update/:id", updateItem);
 router.patch("/join/", limitPeople, joinItem);
+router.patch("/exit/", exitItem);
 router.delete("/:id", deleteItem);
 
 export { router };
