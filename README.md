@@ -7,13 +7,24 @@
 
 1. Bootstrapped with [Express](https://expressjs.com/).
 
+- Relationed Projects
+<div align="center">
+<a href="https://github.com/newtyf/rock-paper-scissors">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/87625663/244238875-236cc1d9-82bb-4661-94ea-86d6f0df6cf6.svg" alt="game-image" width="400" />
+</a>
+<a href="https://github.com/newtyf/socket-rps">
+  <img src="https://github-production-user-asset-6210df.s3.amazonaws.com/87625663/244240525-974484f2-db97-43cd-a48d-9f76a4ee7045.svg" alt="game-image" width="400" />
+</a>
+
+</div>
+
 ## 👾 Set Up
 
 1. Node Version
 
 ```sh
 $ node version 18.7.0
-"you need use this node version or lastest for play music with opus"
+"you need use this node version or lastest"
 ```
 
 2. Create an .env file based on .env.example
