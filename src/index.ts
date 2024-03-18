@@ -9,7 +9,7 @@ const app = express();
 const PORT = process.env.PORT || 3002;
 
 app.use(cors({
-  origin: ["https://rps.newtyf.com", "http://socket-rps.apps.newtyf.com"],
+  origin: ["https://rps.newtyf.com", "http://socket-rps.apps.newtyf.com", "http://localhost:5173"],
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
