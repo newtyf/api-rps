@@ -8,20 +8,8 @@ import { router } from "./routes";
 const app = express();
 const PORT = process.env.PORT || 3002;
 
-const whitelist = ['https://rps.newtyf.com/']
-
 app.use(cors({
-  origin: function (origin, callback) {
-    if (origin === undefined) {
-      return callback(new Error('origin no defnido'))
-    }
-
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  },
+  origin: ["https://rps.newtyf.com/"],
   optionsSuccessStatus: 200
 }));
 app.use(express.json());
