@@ -72,7 +72,7 @@ const updateItem = async ({ params, body }: Request, res: Response) => {
 };
 
 /**
- * join to a room en la base de datos
+ * join to the room in the db
  * @param {*} req
  * @param {*} res
  */
@@ -87,7 +87,7 @@ const joinItem = async ({ body }: Request, res: Response) => {
 };
 
 /**
- * join to a room en la base de datos
+ * exit to the room in the db
  * @param {*} req
  * @param {*} res
  */
@@ -102,7 +102,7 @@ const exitItem = async ({ body }: Request, res: Response) => {
 };
 
 /**
- * delete room en la base de datos
+ * delete room in the db
  * @param {*} req
  * @param {*} res
  */
